@@ -30,33 +30,33 @@ locals { # local expressions
 }
 
 variable "prefix" { # Input variables
-  default = ""
+  default = "dev"
 }
 
-resource "aws_instance" "web" {
+variable "instance_type" { # Input variables
+  default = "t2.micro"
+}
+
+
+# resource_type = aws_instance
+# resource logical_name = server
+# resource_address = aws_instance.server
+resource "aws_instance" "server" {
   ami           = local.image_id
-  instance_type = "t2.micro"
+  instance_type = var.instance_type
 
   tags = {
     Name = var.prefix
   }
 }
 
-resource "aws_vpc" "my_vpc" {
-  cidr_block = "172.16.0.0/16"
 
-  tags = {
-    Name = var.prefix
-  }
-}
+#  TERRAFORM BACKEND
 
+## CONFIGURATION FILE
 output "ubuntu_image_id" {
   value = local.image_id
 }
-
-
-
-
 
 # Terraform Configuration Blocks
 # 1. terraform block
@@ -69,13 +69,30 @@ output "ubuntu_image_id" {
 # 8. output block
 
 
-
+# my_family:
+#   mom_and_dad:
+#     children_1:
+#       name:
+#       age:
+#       occupation:
+#     children_2:
+#       name:
+#       age:
+#       occupation:
+#     children_3:
+#       name:
+#       age:
+#       occupation:
+#     children_4:
+#       name:
+#       age:
+#       occupation:
 
 
 
 ## Object Oriented Language
 # pizza:
-#   12":
+#    size: 12"
 #     white_sauce:
 #       pepperoni:
 #     red_sauce:
